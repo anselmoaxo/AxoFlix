@@ -1,0 +1,44 @@
+{% extends 'base.html' %} 
+
+
+
+ {% block titulo %}
+ 
+ {{ titulo }}
+
+ {% endblock  %} 
+ 
+ {% block content  %}
+ <div class="container">
+    <div>
+        <h1>Essa é a nossa AxoFlix</h1>
+
+        <form action="{% url 'filme:consulta' %}" method="GET">
+            <div class="input-group">
+              <input type="search" class="form-control" placeholder="Pesquisar" id="search" name="q"
+                value="{{ request.GET.q|default:'' }}" style="width: 600px;">
+              <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Pesquisar</button>
+              </div>
+            </div>
+            <small id="search" class="form-text text-muted">Digite o Curso que Produto no campo acima.</small>
+          </form>
+        </div>
+      
+    <div class="row">
+      {% for f in filme %}
+      <div class="col-md-4 border-top-0 shadow-sm p-3 mb-5 bg-white rounded"><br><br>
+        <div class="card" style="width: 18rem;">
+            <img src="{{ f.thumb.url }}"class="card-img-top" >
+          <div class="card-body">
+            <h5 class="card-title">{{ f.titulo }}</h5>
+            <p class="card-text">{{ f.descricao }}</p>
+            <a href="#" class="btn btn-primary">Acessar</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+ {% endblock  %}
